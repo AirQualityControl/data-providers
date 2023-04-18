@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "AirSnitch.DataProviders.SaveDnipro": {
+      "commandName": "Project"
+    },
+    "SaveDnipro Lambda local": {
+      "commandName": "Executable",
+      "executablePath": "%USERPROFILE%/.dotnet/tools/dotnet-lambda-test-tool-7.0.exe",
+      "commandLineArgs": "--port 5550",
+      "workingDirectory": "./bin/$(Configuration)/net7.0"
+    }
+  }
+}
