@@ -18,7 +18,7 @@ public class Function
 	/// <param name="input"></param>
 	/// <param name="context"></param>
 	/// <returns></returns>
-	public async Task FunctionHandler(SaveDniproImporterParams input, ILambdaContext context)
+	public async Task FunctionHandler(Dictionary<string, string> input, ILambdaContext context)
 	{
 		var saveDniproPlatform = new SaveDniproPlatform();
 		var dataStream = saveDniproPlatform.GetSensorsDataStream();
@@ -75,12 +75,3 @@ public class Function
 		return currentTimeInUtc - sensorData.GetLastMeasurementUtcDate() <= TimeSpan.FromHours(2);
 	}
 }
-
-public class SaveDniproImporterParams
-{
-	[JsonProperty("apiUrl")]
-	public string ApiUrl { get; set; }
-}
-
-
-

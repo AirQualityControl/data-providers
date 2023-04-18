@@ -16,12 +16,7 @@ namespace AirSnitch.DataProviders.Lun;
 
 public class Function
 {
-	/// <summary>
-	/// </summary>
-	/// <param name="input"></param>
-	/// <param name="context"></param>
-	/// <returns></returns>
-	public async Task FunctionHandler(string input, ILambdaContext context) {
+	public async Task FunctionHandler(Dictionary<string, string> input, ILambdaContext context) {
 		await SubmitDataPoints();
 	}
 

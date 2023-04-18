@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirSnitch.DataProviders.Lun
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirSnitch.DataProviders.SaveDnipro", "AirSnitch.DataProviders.SaveDnipro\src\AirSnitch.DataProviders.SaveDnipro\AirSnitch.DataProviders.SaveDnipro.csproj", "{14374FC9-3B30-4DD7-B5B7-6A23B3683FEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirSnitch.DataProiders.Common", "AirSnitch.DataProiders.Common\AirSnitch.DataProiders.Common.csproj", "{83BFA01D-78FF-49E8-837F-F0A8C395EBBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirSnitch.DataProiders.Common", "AirSnitch.DataProiders.Common\AirSnitch.DataProiders.Common.csproj", "{83BFA01D-78FF-49E8-837F-F0A8C395EBBF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirSnitch.DataProviders.EcoCity", "AirSnitch.DataProviders.EcoCity\src\AirSnitch.DataProviders.EcoCity\AirSnitch.DataProviders.EcoCity.csproj", "{C9846183-B847-4CBD-92BA-09760369F0B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{83BFA01D-78FF-49E8-837F-F0A8C395EBBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83BFA01D-78FF-49E8-837F-F0A8C395EBBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83BFA01D-78FF-49E8-837F-F0A8C395EBBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9846183-B847-4CBD-92BA-09760369F0B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9846183-B847-4CBD-92BA-09760369F0B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9846183-B847-4CBD-92BA-09760369F0B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9846183-B847-4CBD-92BA-09760369F0B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
