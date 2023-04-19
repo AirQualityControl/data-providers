@@ -23,12 +23,13 @@ public class Function
 		var saveDniproPlatform = new SaveDniproPlatform();
 		var dataStream = saveDniproPlatform.GetSensorsDataStream();
 		var airSnitchPlatform = new AirSnitchPlatform();
+		var sqsConfig = await SqsConfig.CreateAsync();
 		foreach (var saveDniproSensorData in dataStream)
 		{
 			if (IsSensorDataActual(saveDniproSensorData))
 			{
 				var dataPoint = GenerateDataPoint(saveDniproSensorData);
-				await airSnitchPlatform.SubmitMeasurement(dataPoint);
+				await airSnitchPlatform.SubmitMeasurement(dataPoint, sqsConfig);
 			}
 			else
 			{

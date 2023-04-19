@@ -22,19 +22,18 @@ public class Function
 	private async Task SubmitDataPoints() {
 		var apiKey = await EcoCityRequestUtilities.GetApiKeyAsync();
 		var actualStations = await EcoCityDataService.GetLatestDataAsync(apiKey);
-
+		var sqsConfig = await SqsConfig.CreateAsync();
 		var tasks = actualStations.Select(async measurement => {
 			var dataPoint = await GetDataPoint(measurement, apiKey);
 			if (dataPoint != null) {
 				var airSnitchPlatform = new AirSnitchPlatform();
-				await airSnitchPlatform.SubmitMeasurement(dataPoint);
+				await airSnitchPlatform.SubmitMeasurement(dataPoint, sqsConfig);
 			}
 		});
 		await Task.WhenAll(tasks);
 	}
 
-	private async Task<DataPoint> GetDataPoint(Models.StationInfo stationInfo, string apiKey)
-	{
+	private async Task<DataPoint> GetDataPoint(Models.StationInfo stationInfo, string apiKey) {
 		var response = new EcoCityResponse(await EcoCityDataService.GetStationMeasurements(apiKey, stationInfo.Id));
 		var dataPoint = new DataPoint() {
 			StationInfo = new SDK.StationInfo() {

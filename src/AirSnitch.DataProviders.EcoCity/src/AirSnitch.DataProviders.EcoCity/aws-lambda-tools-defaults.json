@@ -7,9 +7,9 @@
   ],
   "profile": "",
   "region": "",
-  "configuration": "Debug",
+  "configuration": "Release",
   "function-architecture": "x86_64",
-  "function-runtime": "dotnet7",
+  "function-runtime": "dotnet6",
   "function-memory-size": 256,
   "function-timeout": 30,
   "function-handler": "AirSnitch.DataProviders.EcoCity::AirSnitch.DataProviders.EcoCity.Function::FunctionHandler"

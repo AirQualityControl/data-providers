@@ -29,10 +29,11 @@ public class Function
 	private async Task SlowStrategy(List<Mesurement> measurements, HttpClient client) {
 		var osmService = new OsmGeocodingService(client);
 		var airSnitchPlatform = new AirSnitchPlatform();
+		var sqsConfig = await SqsConfig.CreateAsync();
 		foreach (var measurement in measurements) {
 			var dataPoint = await GetDataPoint(measurement, osmService);
 			if (dataPoint != null) {
-				await airSnitchPlatform.SubmitMeasurement(dataPoint);
+				await airSnitchPlatform.SubmitMeasurement(dataPoint, sqsConfig);
 			}
 		}
 	}
