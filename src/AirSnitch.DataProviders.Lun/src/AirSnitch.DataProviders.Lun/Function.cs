@@ -28,12 +28,11 @@ public class Function
 
 	private async Task SlowStrategy(List<Mesurement> measurements, HttpClient client) {
 		var osmService = new OsmGeocodingService(client);
-		var airSnitchPlatform = new AirSnitchPlatform();
 		var sqsConfig = await SqsConfig.CreateAsync();
 		foreach (var measurement in measurements) {
 			var dataPoint = await GetDataPoint(measurement, osmService);
 			if (dataPoint != null) {
-				await airSnitchPlatform.SubmitMeasurement(dataPoint, sqsConfig);
+				await AirSnitchPlatform.SubmitMeasurement(dataPoint, sqsConfig);
 			}
 		}
 	}
@@ -86,6 +85,11 @@ public class Function
 				},
 				StationName = "Lun Station #" + measurement.Station.Name
 			},
+			DataProviderInfo = new() {
+				Name = Constants.ProviderName,
+				Uri = Constants.ProviderUri,
+				Tag = Constants.ProviderId
+			},
 			Measurements = GetDataPointMesurements(particle, weather),
 			IndexValue = new() { IndexValue = aqi, IndexName = "US_AIQ" },
 			DateTime = particle.Time,
@@ -100,7 +104,7 @@ public class Function
 			result.Add(new() { Name = "PM1", Value = particle.Pm1.Value });
 		}
 		if (particle.Pm2_5.HasValue) {
-			result.Add(new() { Name = "PM2.5", Value = particle.Pm2_5.Value });
+			result.Add(new() { Name = "PM25", Value = particle.Pm2_5.Value });
 		}
 		if (particle.Pm10.HasValue) {
 			result.Add(new() { Name = "PM10", Value = particle.Pm10.Value });

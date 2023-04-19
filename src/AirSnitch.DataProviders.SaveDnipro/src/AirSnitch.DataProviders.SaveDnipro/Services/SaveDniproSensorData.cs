@@ -40,7 +40,7 @@ public class SaveDniproSensorData
 	{
 		return Pollutants
 			.Where(p => p.Name == "PM2.5")
-			.Select(p => new Measurement { Name = "PM2.5", Value = p.Value }).SingleOrDefault();
+			.Select(p => new Measurement { Name = "PM25", Value = p.Value }).SingleOrDefault();
 	}
 
 	public Measurement GetPm10()
