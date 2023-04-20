@@ -1,4 +1,5 @@
 using AirSnitch.DataProviders.Lun.Models;
+using AirSnitch.DataProviders.Lun.Models.Concentrations;
 using Index = AirSnitch.DataProviders.Lun.Models.Concentrations.Index;
 
 namespace AirSnitch.DataProviders.Lun.Services;
