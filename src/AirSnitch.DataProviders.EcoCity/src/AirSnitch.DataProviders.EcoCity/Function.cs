@@ -26,8 +26,7 @@ public class Function
 		var tasks = actualStations.Select(async measurement => {
 			var dataPoint = await GetDataPoint(measurement, apiKey);
 			if (dataPoint != null) {
-				var airSnitchPlatform = new AirSnitchPlatform();
-				await airSnitchPlatform.SubmitMeasurement(dataPoint, sqsConfig);
+				await AirSnitchPlatform.SubmitMeasurement(dataPoint, sqsConfig);
 			}
 		});
 		await Task.WhenAll(tasks);
@@ -47,6 +46,11 @@ public class Function
 				},
 				StationName = "EcoCity Station #" + stationInfo.Id + " " + stationInfo.StationName
 			},
+			DataProviderInfo = new () {
+				Name = Constants.ProviderName,
+				Uri = Constants.ProviderUri,
+				Tag = Constants.ProviderId
+			},
 			Measurements = GetDataPointMesurements(response),
 			IndexValue = new() { IndexValue =response.Index, IndexName = "US_AIQ" },
 			DateTime = response.MeasurementDateTime,
@@ -61,7 +65,7 @@ public class Function
 			result.Add(new() { Name = "PM1", Value = response.PM1.Value });
 		}
 		if (response.PM2_5.HasValue) {
-			result.Add(new() { Name = "PM2.5", Value = response.PM2_5.Value });
+			result.Add(new() { Name = "PM25", Value = response.PM2_5.Value });
 		}
 		if (response.PM10.HasValue) {
 			result.Add(new() { Name = "PM10", Value = response.PM10.Value });

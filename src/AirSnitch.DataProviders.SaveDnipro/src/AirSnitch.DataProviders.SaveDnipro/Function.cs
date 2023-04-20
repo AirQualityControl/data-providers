@@ -1,4 +1,5 @@
 using AirSnitch.DataProiders.Common;
+using AirSnitch.DataProviders.SaveDnipro.Models;
 using AirSnitch.DataProviders.SaveDnipro.Services;
 using AirSnitch.SDK;
 using AirSnitch.SDK.Measurements;
@@ -22,14 +23,13 @@ public class Function
 	{
 		var saveDniproPlatform = new SaveDniproPlatform();
 		var dataStream = saveDniproPlatform.GetSensorsDataStream();
-		var airSnitchPlatform = new AirSnitchPlatform();
 		var sqsConfig = await SqsConfig.CreateAsync();
 		foreach (var saveDniproSensorData in dataStream)
 		{
 			if (IsSensorDataActual(saveDniproSensorData))
 			{
 				var dataPoint = GenerateDataPoint(saveDniproSensorData);
-				await airSnitchPlatform.SubmitMeasurement(dataPoint, sqsConfig);
+				await AirSnitchPlatform.SubmitMeasurement(dataPoint, sqsConfig);
 			}
 			else
 			{
@@ -56,6 +56,11 @@ public class Function
 					Longitude = Double.Parse(sensorData.Longitude)
 				},
 				StationName = sensorData.Id
+			},
+			DataProviderInfo = new() {
+				Name = Constants.ProviderName,
+				Uri = Constants.ProviderUri,
+				Tag = Constants.ProviderId
 			},
 			Measurements = new List<Measurement>()
 			{
