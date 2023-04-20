@@ -7,7 +7,7 @@ for /f "tokens=*" %%a in ('dotnet tool list --global ^| findstr /i Amazon.Lambda
 
 if "%dotnet_lambda_tools%"=="" (
   dotnet tool install -g Amazon.Lambda.Tools
-  dotnet new --install Amazon.Lambda.Templtes
+  dotnet new install Amazon.Lambda.Templates::6.12.0
   dotnet tool install --global Amazon.Lambda.TestTool-6.0
 ) 
 cd ..
