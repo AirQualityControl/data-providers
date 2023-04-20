@@ -27,7 +27,11 @@ public class SqsConfig
 	}
 
 	public static Task<SqsConfig> CreateAsync() {
+#if DEBUG
+		return Task.FromResult(null as SqsConfig);
+#else
 		var result = new SqsConfig();
 		return result.InitAsync();
+#endif
 	}
 }
