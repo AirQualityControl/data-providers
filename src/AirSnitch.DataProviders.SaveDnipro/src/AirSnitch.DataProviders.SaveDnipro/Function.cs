@@ -1,3 +1,4 @@
+using System.Globalization;
 using AirSnitch.DataProiders.Common;
 using AirSnitch.DataProviders.SaveDnipro.Models;
 using AirSnitch.DataProviders.SaveDnipro.Services;
@@ -52,8 +53,8 @@ public class Function
 				Address = sensorData.StationName,
 				GeoCoordinates = new GeoCoordinates()
 				{
-					Latitude = Double.Parse(sensorData.Latitude),
-					Longitude = Double.Parse(sensorData.Longitude)
+					Latitude = Double.Parse(sensorData.Latitude, System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.NumberFormatInfo.InvariantInfo),
+					Longitude = Double.Parse(sensorData.Longitude, System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.NumberFormatInfo.InvariantInfo)
 				},
 				StationName = sensorData.Id
 			},
