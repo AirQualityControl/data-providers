@@ -53,7 +53,7 @@ public class Function
 			},
 			Measurements = GetDataPointMesurements(response),
 			IndexValue = new() { IndexValue =response.Index, IndexName = "US_AIQ" },
-			DateTime = response.MeasurementDateTime,
+			DateTime =  response.MeasurementDateTime == DateTime.MinValue ? DateTime.MinValue : (response.MeasurementDateTime - TimeSpan.FromHours(3))
 		};
 		return dataPoint;
 	}

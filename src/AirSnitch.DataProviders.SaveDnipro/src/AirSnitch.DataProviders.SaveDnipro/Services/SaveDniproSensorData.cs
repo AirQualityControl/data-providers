@@ -84,7 +84,7 @@ public class SaveDniproSensorData
 		);
 		if (lastMeasurementDateTime != DateTime.MinValue)
 		{
-			lastMeasurementDateTime -= TimeSpan.FromHours(2);//2hr - shift between provider time zone and UTC
+			lastMeasurementDateTime -= TimeSpan.FromHours(3);//3hr - shift between provider time zone and UTC
 		}
 		return lastMeasurementDateTime;
 	}

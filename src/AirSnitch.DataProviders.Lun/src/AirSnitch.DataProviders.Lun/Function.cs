@@ -129,5 +129,4 @@ public class Function
 		var measurements = await dataService.GetMeasurements();
 		return measurements;
 	}
-	
 }
