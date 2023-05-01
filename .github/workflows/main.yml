@@ -18,6 +18,14 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
+    - name: Configure NuGet for GitHub registry
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+      run: |
+        echo "Adding GitHub NuGet registry..."
+        dotnet nuget add source https://nuget.pkg.github.com/AirQualityControl/index.json --name github --username ${{ secrets.TOKEN_OWNER_GITHUB }} --password ${{ secrets.TOKEN_GITHUB }}
+        echo "Done."
+
     - name: Restore dependencies
       run: dotnet restore src/AirSnitch.DataProviders.sln
 
