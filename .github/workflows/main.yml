@@ -23,7 +23,7 @@ jobs:
         NUGET_AUTH_TOKEN: ${{ secrets.TOKEN_GITHUB }}
       run: |
         echo "Adding GitHub NuGet registry..."
-        dotnet nuget add source https://nuget.pkg.github.com/AirQualityControl/index.json --name github --username ${{ secrets.TOKEN_OWNER_GITHUB }} --password ${{ secrets.TOKEN_GITHUB }}
+        dotnet nuget add source https://nuget.pkg.github.com/AirQualityControl/index.json --name github --username ${{ secrets.TOKEN_OWNER_GITHUB }} --password ${{ secrets.TOKEN_GITHUB }} --store-password-in-clear-text
         echo "Done."
 
     - name: Restore dependencies
