@@ -29,6 +29,9 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore src/AirSnitch.DataProviders.sln
 
+    - name: Install Amazon.Lambda.Tools
+      run: dotnet tool install --global Amazon.Lambda.Tools --version 5.6.6
+
     - name: Build and package Lambda functions
       run: |
         dotnet lambda package --configuration Release --framework net6.0 --output-package ./Lun.zip --project-location src/AirSnitch.DataProviders.Lun/src/AirSnitch.DataProviders.Lun
