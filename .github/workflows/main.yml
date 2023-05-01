@@ -19,7 +19,7 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Restore dependencies
-      run: dotnet restore data-providers/src/AirSnitch.DataProviders.sln
+      run: dotnet restore src/AirSnitch.DataProviders.sln
 
     - name: Build and package Lambda functions
       run: |
