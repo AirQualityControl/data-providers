@@ -1,0 +1,41 @@
+name: CI/CD for AWS Lambda
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup .NET 6.0
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore data-providers/src/AirSnitch.DataProviders.sln
+
+    - name: Build and package Lambda functions
+      run: |
+        dotnet lambda package --configuration Release --framework net6.0 --output-package ./Lun.zip --project-location src/AirSnitch.DataProviders.Lun/src/AirSnitch.DataProviders.Lun
+        dotnet lambda package --configuration Release --framework net6.0 --output-package ./SaveDnipro.zip --project-location src/AirSnitch.DataProviders.SaveDnipro/src/AirSnitch.DataProviders.SaveDnipro
+        dotnet lambda package --configuration Release --framework net6.0 --output-package ./EcoCity.zip --project-location src/AirSnitch.DataProviders.EcoCity/src/AirSnitch.DataProviders.EcoCity
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-west-3
+
+    - name: Deploy Lambda functions
+      run: |
+        aws lambda update-function-code --function-name Lun_test --zip-file fileb://Lun.zip
+        aws lambda update-function-code --function-name SaveDnipro_test --zip-file fileb://SaveDnipro.zip
+        aws lambda update-function-code --function-name EcoCity_test --zip-file fileb://EcoCity.zip
