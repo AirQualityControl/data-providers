@@ -47,6 +47,6 @@ jobs:
 
     - name: Deploy Lambda functions
       run: |
-        aws lambda update-function-code --function-name Lun_test --zip-file fileb://Lun.zip
-        aws lambda update-function-code --function-name SaveDnipro_test --zip-file fileb://SaveDnipro.zip
-        aws lambda update-function-code --function-name EcoCity_test --zip-file fileb://EcoCity.zip
+        aws lambda update-function-code --function-name LunAir --zip-file fileb://Lun.zip
+        aws lambda update-function-code --function-name SaveDnipro --zip-file fileb://SaveDnipro.zip
+        aws lambda update-function-code --function-name EcoCityProvider --zip-file fileb://EcoCity.zip
