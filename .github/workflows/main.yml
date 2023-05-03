@@ -38,6 +38,15 @@ jobs:
         dotnet lambda package --configuration Release --framework net6.0 --output-package ./SaveDnipro.zip --project-location src/AirSnitch.DataProviders.SaveDnipro/src/AirSnitch.DataProviders.SaveDnipro
         dotnet lambda package --configuration Release --framework net6.0 --output-package ./EcoCity.zip --project-location src/AirSnitch.DataProviders.EcoCity/src/AirSnitch.DataProviders.EcoCity
 
+    - name: Upload Lambda artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: lambda-artifacts
+        path: |
+          ./Lun.zip
+          ./SaveDnipro.zip
+          ./EcoCity.zip
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
