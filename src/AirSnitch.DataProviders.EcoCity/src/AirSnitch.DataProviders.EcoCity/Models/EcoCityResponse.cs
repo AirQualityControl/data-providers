@@ -1,4 +1,5 @@
 using AirSnitch.SDK;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,16 +59,27 @@ namespace AirSnitch.DataProviders.EcoCity.Models
 
 		private double? GetValue(string propName)
 		{
-			AirPollutionResultDto dto = _rawResult.SingleOrDefault(p => p.Name == propName);
-			if (dto == null) {
-				Console.WriteLine($"Unable to fetch result with parameter name {propName}");
+			try
+			{
+                AirPollutionResultDto dto = _rawResult.SingleOrDefault(p => p.Name == propName);
+                if (dto == null)
+                {
+                    Console.WriteLine($"Unable to fetch result with parameter name {propName}");
+                    return default;
+                }
+                if (double.TryParse(dto.Value, out double value))
+                {
+                    return value;
+                }
+                else
+                {
+                    return default;
+                }
+            } catch (Exception ex) {
+				Console.WriteLine($"Message: {JsonConvert.SerializeObject(_rawResult)}\npropName: {propName},\n{ex.Message} ");
 				return default;
 			}
-			if (double.TryParse(dto.Value, out double value)) {
-				return value;
-			} else {
-				return default;
-			}
+			
 		}
 
 	}
